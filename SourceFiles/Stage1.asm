@@ -1,3 +1,4 @@
+; Stage1 boot sector — DND-1 8086 Assembly port. Loads Stage2 from sectors 2+ to 0x8000 and jumps.
 [BITS 16]
 [ORG 0x7C00]
 [CPU 8086]
@@ -19,7 +20,7 @@ main:
 	mov bx, LoadingSectors
 	call print_string
 	pop es
-	mov bx, 0x8000 					;Set our starting address to 0x9000
+	mov bx, 0x8000 					;Set our starting address to 0x8000
 	mov dh, 60 						;Load 99 more sectors
 	mov dl, [BOOT_DRIVE] 			;Set our drive to the boot drive
 	call disk_load 					;Perform the load operation

@@ -55,6 +55,8 @@ get_character_name:
 		call get_key
 		jmp get_character_name
 	.return:
+		mov bx, InputStringBuffer
+		call string_length
 		StringCopy bx, Character.name
 ret
 

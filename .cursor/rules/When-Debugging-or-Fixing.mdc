@@ -1,0 +1,33 @@
+---
+description: When fixing a bug or debugging, check known issues first, run tests, and consider adding a regression test.
+alwaysApply: false
+---
+
+# Cursor Rule: When-Debugging-or-Fixing
+
+TRIGGER
+- Apply when the user asks to fix a bug, debug failing behavior, or investigate incorrect output or crash.
+- Apply when the user mentions a specific issue (e.g. trap does not use spikes, save does not load, move crashes).
+
+BEFORE CHANGING CODE
+1. Check Documentation/Issues-and-Risks.md for the area you are touching (inventory, trap, disk_save, get_continues, read_dungeon, wait_key, get_tile_number). If an issue matches, read the Fix and Fixed lines; if already Fixed, the fix may have regressed.
+2. Check Documentation/Issues-and-Risks.md for fix-and-test phases and regression tests.
+3. Run npm test. Reproduce the bug if possible (game build or minimal scenario).
+
+WHILE FIXING
+- Prefer minimal changes. Do not refactor unrelated code.
+- Follow Assembly-and-Test-Conventions for any new or modified assembly.
+- If the fix touches inventory, trap handling, save/load, or dungeon init, re-read the relevant part of Issues-and-Risks.md after the fix.
+
+AFTER FIXING
+1. Run npm test. All tests must pass.
+2. If the fix resolves an issue in Issues-and-Risks.md, update that entry (add Fixed: and the change).
+3. If behavior or flow changed, update Documentation (Game-Flow, Data-Structures, Architecture) as needed.
+4. Consider adding a regression test under Test/Game/ per Documentation/Adding-Tests.md and Assembly-and-Test-Conventions.
+
+COMMON AREAS (see Issues-and-Risks.md)
+- read_dungeon (Load Game.asm), wait_key/get_key (KeyboardIO.asm), disk_save (DiskIO.asm), get_continues (Intro.asm), Inventory (check_inventory, remove_from_inventory), get_tile_number (bounds 0-24), Test/Libraries sync.
+
+QUICK REFS
+- Documentation/Issues-and-Risks.md, Documentation/Testing.md, rule Assembly-and-Test-Conventions.
+- For intended behavior of the component you're fixing: `.cursor/build-specs/` (e.g. 04-Dungeon-and-Tiles, 06-Move-and-Tile-Handling, 08-Save-Load); see build-specs/README.md.

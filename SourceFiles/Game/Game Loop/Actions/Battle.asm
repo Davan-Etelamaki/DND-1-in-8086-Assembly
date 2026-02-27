@@ -302,7 +302,7 @@ check_for_random_encounter:
 	push dx
 
 	inc bx
-	mov [CurrentMonster.type], bx
+	mov [CurrentMonster.type], bl
 	mov cx, 7
 	call random_int
 	inc bx

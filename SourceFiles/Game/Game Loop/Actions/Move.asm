@@ -409,13 +409,14 @@ ret
 find_secret_door:
 	call roll_d6
 	cmp bx, 4
-	jg .wall
+	jg .door
+	.wall:
+		call hit_wall
+		jmp .return
+	.door:
 		WriteLine SecretDoorStrings, 0
 		WriteLine SecretDoorStrings, 1
 		call advance_position
-		jmp .return
-	.wall:
-		call hit_wall
 	.return:
 ret
 

@@ -1,3 +1,5 @@
+; Dungeon helpers: get_current_monster, get_y_bounds, get_x_bounds, get_tile_number.
+; Uses Character, CurrentMonster, CurrentDungeon, rows (LookupTables). Callers must pass 0<=x,y<=24 to get_tile_number.
 section .text
 
 get_current_monster:
@@ -80,7 +82,7 @@ ret
 ;********************************************************************************
 ;   get_x_bounds
 ;   Purpose:
-;      To limit the bounds to the horizongal range of the map
+;      To limit the bounds to the horizontal range of the map
 ;           Prototype:
 ;               Void get_x_bounds(byte range);
 ;           Algorithm:
@@ -137,6 +139,7 @@ get_x_bounds:
 	.return:
 ret
 
+; Callers must pass 0 <= x (CX) <= 24 and 0 <= y (DX) <= 24; no bounds check.
 get_tile_number:
 	mov bx, dx
 	shl bx, 1

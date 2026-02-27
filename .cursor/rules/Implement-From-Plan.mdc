@@ -1,0 +1,126 @@
+---
+description: Implement assembly, tests, and docs from plan or requirements. Use Documentation/ and existing source as spec. Delegates verification to verify-implementation Skill.
+alwaysApply: true
+---
+
+# Cursor Rule: Implement-From-Plan
+
+────────────────────────────
+TRIGGER
+────────────────────────────
+- Apply when the user message contains:
+  - "Implement-From-Plan" or "Implement-Assembly-Tests"
+- Or when invoked by build-and-test-pipeline Skill
+
+────────────────────────────
+INPUT REQUIREMENTS
+────────────────────────────
+
+- Requirements come from:
+  - Plan from Plan-From-Requirements rule (pasted requirements or feature description), or
+  - In-repo Documentation/ (Game-Flow.md, Architecture.md, Testing.md, DND1-Spec-Web-References.md, etc.), or
+  - **`.cursor/build-specs/`** — component-level spec (00-FULL-SCOPE.md and 01–09; see build-specs/README.md) when implementing a specific area (character, shop, monsters, dungeon/tiles, commands, move, combat, save/load), or
+  - Explicit user instructions.
+- If a working plan or task list exists in chat or a doc, use it.
+
+Optional flags:
+- VerificationPhase: true/false (default false)
+
+────────────────────────────
+SCOPE
+────────────────────────────
+
+- Assembly (8086 NASM, `-f bin`), two-stage boot (Stage1, Stage2).
+- Test code: `Test/` (unit tests in assembly: Test/Libraries/, Test/Game/).
+- Playwright tests: `playwright/tests/` (see playwright/README.md).
+- Scripts: `scripts/` (build.js, serve.js, run-tests.js, start.js).
+- Documentation: update `Documentation/` when behavior or flow changes.
+- Do NOT introduce unrelated backend services, new languages, or frameworks. Stay within repo stack.
+
+────────────────────────────
+TECH CONSTRAINTS
+────────────────────────────
+
+- NASM for 8086, output `-f bin`. Follow existing SourceFiles/ and Test/ layout.
+- Node scripts as in package.json (build, serve, test). Do not change dependency versions unless required.
+- Playwright for browser-based tests against the v86 emulator (see playwright/support/emulator.js).
+- Follow existing naming and file conventions (e.g. Stage1.asm, Stage2.asm, Test/Libraries/, Test/Game/).
+
+────────────────────────────
+REPO CONVENTIONS
+────────────────────────────
+
+Before implementing:
+- Read relevant docs: Documentation/Game-Flow.md, Architecture.md, Testing.md, Build-and-Run.md; for game-behavior or alignment with the original game, also Documentation/DND1-Spec-Web-References.md; for **component-level behavior** (character, shop, dungeon, move, combat, save/load), use **`.cursor/build-specs/`** (README.md and the relevant 00–09 file); for test coverage, Documentation/Acceptance-Criteria.md (if present); for adding tests, Documentation/Testing.md (strategy and step-by-step). Use the rule **Assembly-and-Test-Conventions** when writing assembly or adding unit tests.
+- Follow existing assembly patterns in SourceFiles/ and Test/.
+- Follow Playwright test structure in playwright/tests/ and playwright/README.md.
+- Reuse Test/Libraries/ where applicable.
+- When changing character, monsters, tiles, or shop: consider mapping in DND1-Spec-Web-References.md so port stays aligned with the reference spec.
+- Do NOT refactor unrelated code.
+
+────────────────────────────
+GROUNDING RULES
+────────────────────────────
+
+- Functional requirements from pasted text, user message, or Documentation/ only.
+- Do NOT invent behavior not described in docs or requirements.
+- If something is ambiguous: infer from existing code and docs; add a short comment or doc note.
+
+────────────────────────────
+CODE STYLE
+────────────────────────────
+
+- Match existing assembly style (comments, labels, section layout).
+- Match existing JS/Playwright style in scripts/ and playwright/.
+- Do NOT reformat unrelated files.
+
+────────────────────────────
+VERIFICATION DELEGATION
+────────────────────────────
+
+If VerificationPhase == true:
+- Do NOT run tests inside this Rule.
+- Invoke the verify-implementation Skill and stop.
+
+Invocation format:
+VERIFY_IMPLEMENTATION
+Scope: <short description, e.g. "game flow unit tests" or "Stage2 move logic">
+Paths: <list of main files changed, e.g. SourceFiles/Stage2.asm, Test/Game/...>
+
+Then stop.
+
+────────────────────────────
+IMPLEMENTATION PROCESS (BUILD PHASE)
+────────────────────────────
+
+If VerificationPhase == false:
+1) Output a short checklist of files to create/modify (assembly, test, scripts, docs).
+2) Implement incrementally:
+   - Assembly changes (SourceFiles/ or Test/)
+   - Unit test updates (Test/)
+   - Playwright test updates if UI/flow tested (playwright/tests/)
+   - Documentation updates if behavior changed
+3) Keep diff minimal. Do not modify unrelated files.
+
+────────────────────────────
+OUTPUT (STRICT)
+────────────────────────────
+
+If VerificationPhase == false:
+- Make actual edits in the repo.
+- Provide:
+  - File list (Created / Modified)
+  - Brief mapping to requirements (e.g. "AC: move validation per Game-Flow.md")
+  - Confirmation that Documentation/ was updated if behavior changed
+- Do NOT repeat the full requirements. Do NOT add extra commentary.
+
+If VerificationPhase == true:
+- Output ONLY the verify-implementation Skill invocation (exact format above).
+- Do NOT add extra commentary.
+
+────────────────────────────
+VERIFICATION (MANUAL)
+────────────────────────────
+
+- Run `npm test` (or equivalent per Build-and-Run.md / Testing.md).
+- If Playwright tests exist for the change, run them per playwright/README.md.

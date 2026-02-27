@@ -1,0 +1,77 @@
+---
+description: NASM 8086 and test layout conventions for this repo. Use when writing or modifying assembly or adding unit tests.
+alwaysApply: false
+---
+
+# Cursor Rule: Assembly-and-Test-Conventions
+
+────────────────────────────
+TRIGGER
+────────────────────────────
+- Apply when writing or modifying assembly (SourceFiles/, Test/), or when adding or changing unit tests.
+- Referenced by Plan-From-Requirements and Implement-From-Plan for consistency.
+
+────────────────────────────
+BUILD & ORIGIN
+────────────────────────────
+- NASM: `-f bin`, 8086 (`[BITS 16]` `[CPU 8086]`), include path `-i "SourceFiles/"`.
+- Stage1: ORG 0x7C00, 512 bytes, loads sectors 2+ to 0x8000, jumps to Stage2.
+- Stage2: ORG 0x8000; segment 0; stack at 0x7FFF. Built from SourceFiles/Stage2.asm and includes.
+
+────────────────────────────
+STAGE2 INCLUDE ORDER
+────────────────────────────
+- Order matters: macros and DiskIO first; then Constants (Structures, Macros); then Game libraries (Player, Dungeon, Magic, Inventory) with Test/Game/ includes **immediately after** each game lib when DEBUG; then Intro, Roll Character, Shop, Load Game, Game Loop, Actions; then ExtendedPrint, StringFunctions, MemoryFunctions, Int, Dice with Test/Game/Dice.asm after Dice when DEBUG; then KeyboardIO.
+- **Adding a new game module:** Add `%include "Game/.../NewModule.asm"` in the right place; if it needs a unit test, add `%ifdef DEBUG` / `%include "../Test/Game/NewModule.asm"` / `%endif` right after it (see existing Dice, Player, Dungeon, Inventory).
+
+────────────────────────────
+FORMATTING & DOCUMENTATION
+────────────────────────────
+- **File header:** Start each .asm file with a 1–2 line comment describing purpose and (if relevant) dependencies. Example: `; Dungeon helpers: get_y_bounds, get_tile_number. Uses Character, CurrentDungeon, rows.`
+- **Sections:** Use lowercase `section .text`, `section .data`, `section .bss`.
+- **Indentation:** One tab for code inside labels; align `%include` with a single tab.
+- **Routine comments:** SourceFiles may use the long block style (Purpose, Prototype, Entry/Exit, Uses); Test files use short inline comments per assertion.
+
+────────────────────────────
+NAMING & LAYOUT
+────────────────────────────
+- SourceFiles: PascalCase.asm (e.g. Stage1.asm, Move.asm). Data under Data/ (Constants, Variables, Strings).
+- Test: Test/Tests.asm is the runner; Test/Libraries/ for non-game (Memory, Print, Int, Strings, IO); Test/Game/ for game logic tests. One test routine per file (e.g. GameDiceTests, GamePlayerTests); name the routine so it matches a section id in Playwright (e.g. GameDiceTests → "GameDiceTests").
+
+────────────────────────────
+MACROS & HELPERS
+────────────────────────────
+- Use repo macros: NewString, WriteLine, StringCopy, etc. (see SourceFiles/Libraries/ and Data/Constants/Macros.asm).
+- Structures: monster, spell, item, CharacterAttribute (Structures.asm). NewMonster, NewSpell, NewItem, NewAttribute for tables.
+- Tests: PrintSuccess, PrintFail (from Test/Libraries/Graphics/Print.asm). Assert by comparing then calling PrintSuccess or PrintFail.
+
+────────────────────────────
+ADDING A NEW UNIT TEST (CHECKLIST)
+────────────────────────────
+1. **Test/Game/NewThing.asm** — section .data (optional test string), section .text, single routine e.g. `GameNewThingTests:` that prints a section marker line, sets up state, calls game code, then PrintSuccess/PrintFail; ret.
+2. **Test/Tests.asm** — add `call GameNewThingTests` and `%ifndef AUTOMATED` `call wait_key` `%endif` and `call clear_screen` in run order (before the final WriteLine AllTestsPassedString). Add `%include "../Test/Game/NewThing.asm"` at top if not included via Stage2 (game tests are included via Stage2 under DEBUG).
+3. **SourceFiles/Stage2.asm** — ensure the game source the test needs is included; add `%ifdef DEBUG` `%include "../Test/Game/NewThing.asm"` `%endif` **immediately after** that game source (see Dice.asm, Player.asm, Dungeon.asm, Inventory.asm).
+4. **playwright/support/emulator.js** — add to SECTION_MARKERS: `{ id: "GameNewThingTests", patterns: ["Testing NewThing ..."] }` (use a string your test prints). Order must match RunTests order.
+5. **playwright/tests/assembly/suite.spec.js** — add one test that expects `runResult.parsed.sections` to contain `"GameNewThingTests"` and `runResult.parsed.hasFail` to be false.
+
+────────────────────────────
+DEBUG & AUTOMATED
+────────────────────────────
+- `-DDEBUG`: Stage2 runs RunTests instead of the game; Test/Game/ and Test/Tests.asm are included.
+- `-DAUTOMATED`: with DEBUG, skips wait_key between tests so `npm test` does not block. Used for CI/Playwright.
+
+────────────────────────────
+KNOWN PITFALLS (SEE Issues-and-Risks.md)
+────────────────────────────
+- get_tile_number: callers must ensure 0 ≤ x, y ≤ 24 (no in-code bounds check).
+- Test/Libraries: keep in sync with SourceFiles if any code is duplicated; DEBUG build tests the game’s SourceFiles, not Test/Libraries for game logic.
+- When touching inventory, trap handling, or save/load: check Issues-and-Risks.md for known bugs and regression-test guidance.
+
+────────────────────────────
+QUICK REFS
+────────────────────────────
+- Full test-add steps and template: Documentation/Testing.md (section "Adding a new unit test")
+- Strategy and what’s covered: Documentation/Testing.md
+- Data layout: Documentation/Data-Structures.md
+- Game flow: Documentation/Game-Flow.md
+- Component-level spec (character, dungeon, move, combat, save/load, etc.): `.cursor/build-specs/` (README.md, 00-FULL-SCOPE.md, 01–09)

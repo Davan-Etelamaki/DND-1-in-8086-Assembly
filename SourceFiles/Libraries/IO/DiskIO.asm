@@ -94,7 +94,7 @@ disk_save:
 	mov di, 0 					;Clear out DI
 	mov es, di 					;Clear out ES
 
-	sub bx, 0x9000 				;Remove our offset
+	sub bx, 0x8000 				;Remove our offset
 
 	mov cl, 9 					;Put 9 in cl to for our shift 
 	shr bx, cl 					;Shift right by 9 essentially dividing by 512
@@ -104,7 +104,7 @@ disk_save:
 	mov cl, 9 					;Put 9 in cl for our next shift
 	shl bx, cl 					;Shift left by 9 essentially multiplying by 512 this puts us as the start of the sector before the code to save
 
-	add bx, 0x9000				;Add our offset back in
+	add bx, 0x8000				;Add our offset back in
 
 	mov cl, al 					;Set our starting Sector
 	mov ah, 0x03 				;BIOS write sector function

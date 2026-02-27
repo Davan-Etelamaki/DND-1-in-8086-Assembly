@@ -1,3 +1,5 @@
+; Stage2 — DND-1 8086 Assembly port.
+; Loaded at 0x8000 by Stage1. Defines boot entry, then includes game modules and (if DEBUG) Test/Tests.asm.
 [BITS 16]
 [ORG 0x8000]
 [CPU 8086]
@@ -9,7 +11,7 @@ jmp boot
 %include "Libraries/Graphics/Macros.asm"
 %include "Libraries/Strings/Macros.asm"
 %include "Libraries/IO/DiskIO.asm"
-Section .text
+section .text
 boot:
 	mov [boot_drive], dl
 	xor ax, ax								;clear ax
@@ -40,9 +42,18 @@ boot:
 	%include "Data/Constants/Macros.asm"
 
 	%include "Game/Libraries/Player.asm"
+	%ifdef DEBUG
+		%include "../Test/Game/Player.asm"
+	%endif
 	%include "Game/Libraries/Dungeon.asm"
+	%ifdef DEBUG
+		%include "../Test/Game/Dungeon.asm"
+	%endif
 	%include "Game/Libraries/Magic.asm"
 	%include "Game/Libraries/Inventory.asm"
+	%ifdef DEBUG
+		%include "../Test/Game/Inventory.asm"
+	%endif
 
 	%include "Game/Intro.asm"
 	%include "Game/Roll Character.asm"
@@ -69,6 +80,11 @@ boot:
 	%include "Libraries/Memory/MemoryFunctions.asm"
 	%include "Libraries/Math/Int.asm"
 	%include "Libraries/Math/Dice.asm"
+	%ifdef DEBUG
+		%include "../Test/Game/Dice.asm"
+		%include "../Test/Game/Monsters.asm"
+		%include "../Test/Game/LogicTests.asm"
+	%endif
 	%include "Libraries/IO/KeyboardIO.asm"
 
 

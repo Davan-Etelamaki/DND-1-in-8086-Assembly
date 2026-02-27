@@ -157,7 +157,7 @@ get_dungeon_num:
 		call invalid_input
 		jmp get_dungeon_num
 	.return:
-	mov [DungeonNumber], bx
+	mov [DungeonNumber], bl
 ret
 
 ;********************************************************************************
@@ -198,7 +198,7 @@ get_continues:
 	cmp bx, 2
 	jg .fail
 
-	mov [Character.continues], bx
+	mov [Character.continues], bl
 	jmp .return
 	.fail:
 		call invalid_input

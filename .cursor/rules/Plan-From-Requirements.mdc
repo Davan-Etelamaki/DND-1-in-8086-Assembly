@@ -1,0 +1,44 @@
+---
+description: Use pasted requirements or feature description; use in-repo docs and code as source of truth. Optional web search for DND game reference.
+alwaysApply: true
+---
+
+# Cursor Rule: Plan-From-Requirements
+
+────────────────────────────
+TRIGGER
+────────────────────────────
+- Apply when the user provides:
+  - **Pasted requirements/spec** (plain text or markdown), or
+  - A **feature/change description** (e.g. "add unit tests for X", "fix move logic")
+- Or when invoked by the build-and-test-pipeline Skill.
+
+────────────────────────────
+SOURCE OF TRUTH (NO EXTERNAL SPEC REQUIRED)
+────────────────────────────
+
+This project does not rely on an external spec. Use:
+
+1. **In-repo documentation** (authoritative):
+   - `Documentation/` — especially `Game-Flow.md`, `Architecture.md`, `Testing.md`, `Build-and-Run.md`, `Data-Structures.md`, `Issues-and-Risks.md`
+   - **`Documentation/DND1-Spec-Web-References.md`** — reference spec for Richard Garriott's DND #1 (1977) from web sources; use when scoping or aligning game behavior (character, classes, monsters, tiles, shop).
+   - **`.cursor/build-specs/`** — **authoritative component-level spec**: full scope (00-FULL-SCOPE.md), component specs 01–09 (Character, Shop, Monsters, Dungeon/Tiles, Commands, Move/Tile, Combat, Save/Load, BASIC excerpts). See build-specs/README.md for the index. Use these when scoping features or aligning to the original game.
+   - **`Documentation/Acceptance-Criteria.md`** — Acceptance Criteria derived from spec by verification; use when planning tests or checking coverage.
+   - `playwright/README.md` for test layout; **Documentation/Testing.md** for strategy and step-by-step test addition; **Documentation/README.md** for doc index
+2. **Existing source** — `SourceFiles/`, `Test/`, `tools/`, `scripts/` — as the implementation reference.
+3. **Optional supplement:** If behavior beyond the in-repo spec is needed, you may web search (e.g. "Richard Garriott DND #1", "DND PLATO 1975"). Prefer `DND1-Spec-Web-References.md` first; no official external spec exists.
+
+────────────────────────────
+CONTEXT GUARD — OUTPUT ARTIFACTS
+────────────────────────────
+
+- Implementation plans or task lists may be written to a working document or kept in chat; no mandatory build-pack path.
+- When the user pastes requirements: derive scope and acceptance criteria from the pasted text plus the docs above. Do not invent requirements not present in the pasted text or docs.
+
+────────────────────────────
+OUTPUT
+────────────────────────────
+
+- Produce a **concise implementation plan** (what to change, which files, which tests to add/update) or proceed to implementation following the plan.
+- Do not output multiple candidate plans; pick one approach consistent with the repo.
+- Reference specific docs or files (e.g. `Documentation/Game-Flow.md`, `Documentation/DND1-Spec-Web-References.md`, `Test/Game/`) where relevant.

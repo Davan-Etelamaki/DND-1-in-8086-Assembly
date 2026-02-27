@@ -34,7 +34,8 @@ ret
 game_loop_welcome:
 
 	Write WelcomeStrings, 0
-	mov bx, [DungeonNumber]
+	mov bl, [DungeonNumber]
+	xor bh, bh
 	call print_dec
 	call new_line
 

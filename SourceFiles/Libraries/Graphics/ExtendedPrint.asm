@@ -155,6 +155,17 @@ ret
 ;*******************************************************************************
 push_character:						;Character Print
 	push ax
+	%ifdef DEBUG
+		push bx
+		push dx
+		mov bx, sp
+		mov al, [ss:bx+4]		; character was in AX (pushed first), so at sp+4
+		mov dx, 0				; COM1
+		mov ah, 1				; write character to serial (BIOS int 14h)
+		int 0x14
+		pop dx
+		pop bx
+	%endif
 	push bx
 	push cx
 	push dx

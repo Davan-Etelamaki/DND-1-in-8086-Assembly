@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DND-1 Emulator (v86)</title>
+  <style>
+    body { margin: 0; background: #000; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+    #screen_container { width: 640px; height: 400px; image-rendering: pixelated; image-rendering: crisp-edges; }
+    #screen_container canvas { width: 100%; height: 100%; }
+    .info { color: #888; font-family: monospace; font-size: 12px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div id="screen_container"></div>
+  <p class="info">DND-1 in 8086 Assembly (v86). Serial output is captured for tests.</p>
+  <script>
+    window.__v86SerialOutput = [];
+    (function() {
+      var script = document.createElement("script");
+      script.src = "https://unpkg.com/v86@0.5/build/libv86.js";
+      script.onload = function() {
+        var diskUrl = new URLSearchParams(window.location.search).get("disk") || "/Compiled/Bin/OS.bin";
+        var base = window.location.origin;
+        if (diskUrl.startsWith("/")) diskUrl = base + diskUrl;
+
+        var emulator = new V86({
+          wasm_path: "https://unpkg.com/v86@0.5/build/v86.wasm",
+          screen_container: document.getElementById("screen_container"),
+          bios: { url: "https://raw.githubusercontent.com/copy/v86/master/bios/seabios.bin" },
+          vga_bios: { url: "https://raw.githubusercontent.com/copy/v86/master/bios/vgabios.bin" },
+          fda: { url: diskUrl },
+          autostart: true,
+          disable_keyboard: false,
+        });
+
+        emulator.add_listener("serial0-output-byte", function(byte) {
+          window.__v86SerialOutput.push(byte);
+        });
+      };
+      document.head.appendChild(script);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+---
+description: Structured audit log with Git metadata for builds and changes. Writes to Documentation/ai-build-log.md.
+alwaysApply: true
+---
+
+# Cursor Rule: Log-Build
+
+────────────────────────────
+TRIGGER
+────────────────────────────
+- Apply when the user message contains:
+  - "Log-Build"
+  - "DOC_LOG"
+- Or when invoked by the build-and-test-pipeline Skill after implementation.
+
+────────────────────────────
+INPUT SOURCES
+────────────────────────────
+
+- Inspect the current working tree to determine **files created/modified** (assembly, tests, scripts, docs).
+- If the change was driven by a build-spec: note the spec (e.g. `.cursor/build-specs/04-Dungeon-and-Tiles.md`) in the log entry "What was built / changed" or "Notes" where helpful.
+- Retrieve Git metadata when available:
+  - Current branch name
+  - Current HEAD commit hash (full 40-character)
+  - Short commit hash (first 7 characters)
+- If Git info cannot be determined: use "Unknown" for branch and commit.
+
+Pipeline context (when invoked by Skill):
+- Runner: build-and-test-pipeline (Skill)
+- VerificationPhase: true/false/unknown
+
+────────────────────────────
+TARGET FILE
+────────────────────────────
+
+Write documentation to:
+**Documentation/ai-build-log.md**
+
+If `Documentation/` does not exist, create it.
+
+If the file exists: **prepend** the new entry at the top (reverse chronological).
+
+────────────────────────────
+TIMESTAMP + FOOTER
+────────────────────────────
+
+- Each log entry must include a timestamp: `YYYY-MM-DD HH:MM` (local time).
+- Each entry must include: Branch, Commit (short), Commit (full).
+- Append (or update) a **single footer block** at the end of the file:
+
+---
+Last Pipeline Execution: <YYYY-MM-DD HH:MM>
+Runner: build-and-test-pipeline (Skill)
+VerificationPhase: <true/false/unknown>
+Branch: <branch-name>
+Commit (short): <7-char hash>
+Commit (full): <40-char hash>
+
+If the footer already exists, replace the entire footer block. Do not create multiple footers.
+
+────────────────────────────
+ENTRY TEMPLATE
+────────────────────────────
+
+## <YYYY-MM-DD HH:MM> — <Short title, e.g. "Game flow unit tests" or "Fix move logic">
+
+**Pipeline**
+- Runner: build-and-test-pipeline (Skill) [or "Manual"]
+- VerificationPhase: <true/false/unknown>
+
+**Git**
+- Branch:
+- Commit (short):
+- Commit (full):
+
+**What was built / changed**
+-
+
+**Files changed**
+- Created:
+- Modified:
+
+**Tests**
+- Unit tests added/updated:
+- npm test: pass/fail/skipped
+
+**Notes / TODO**
+-

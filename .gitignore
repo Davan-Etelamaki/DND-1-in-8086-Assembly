@@ -215,7 +215,29 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-*.txt
+#############
+## This project (NASM, Node, Playwright)
+#############
+
+# Build output (Makefile / Scripts/build.js)
+Compiled/
+
+# Node
+node_modules/
+npm-debug.log*
+.npm
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+.playwright/
+
+# Optional local env
+.env
+.env.local
+
+# Keep: Dungeons/*.txt and other .txt are tracked
+# *.docx and *sublime* left out; add if you use them
 *.docx
-*.com
 *sublime*

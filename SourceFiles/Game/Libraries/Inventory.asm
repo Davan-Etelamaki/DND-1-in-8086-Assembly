@@ -1,3 +1,4 @@
+; Inventory: check_inventory(item), remove_from_inventory(slot), add_to_inventory(item). Uses Character.itemCount, Character.inventory.
 section .text
 ;********************************************************************************
 ;   check_inventory
@@ -26,7 +27,6 @@ check_inventory:
 	push bx
 	mov bh, 0
 	mov bl, byte[Character.itemCount]
-	dec al
 	.loop:
 		cmp al, byte[Character.inventory + bx]
 		je .yes
@@ -67,7 +67,6 @@ remove_from_inventory:
 	push bx
 	mov bh, 0
 	push cx
-		inc al
 		mov bl, [Character.itemCount]
 		dec bl
 		mov cl, [Character.inventory + bx]

@@ -1,0 +1,22 @@
+{
+  "name": "dnd1-8086-assembly",
+  "version": "0.1.0",
+  "description": "DND #1 port in bootable 8086 assembly",
+  "private": true,
+  "scripts": {
+    "start": "node scripts/start.js",
+    "build": "node scripts/build.js",
+    "build:debug": "node scripts/build.js --debug",
+    "clean": "node scripts/clean.js",
+    "test": "node scripts/run-tests.js",
+    "test:qemu": "node scripts/run-tests.js",
+    "test:playwright": "playwright test"
+  },
+  "keywords": ["dnd", "8086", "assembly", "bootable"],
+  "license": "SEE LICENSE IN REPO",
+  "engines": { "node": ">=18.0.0" },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "playwright": "^1.49.0"
+  }
+}

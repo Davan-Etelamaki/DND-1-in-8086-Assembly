@@ -1,3 +1,4 @@
+; Load/save: read_dungeon (copy Dungeons+DungeonNumber*625, random 7/8 on empty), load_game, save_game. Uses Dungeons, CurrentDungeon, game_save.
 section .text
 ;********************************************************************************
 ;   read_dungeon
@@ -39,24 +40,27 @@ read_dungeon:
 	mov cx, 625
 	call mem_copy
 
-	mov cx, 625
+	xor bx, bx
 	.loop:
-		cmp cx, 0
-		jne .skip
+		cmp byte [CurrentDungeon + bx], 0
+		jne .next
+		push bx
 		call roll_d100
 		cmp bx, 97
+		pop bx
 		jl .no_str
-			mov bx, cx
-			mov byte [CurrentDungeon + bx], 7
+		mov byte [CurrentDungeon + bx], 7
 		.no_str:
+		push bx
 		call roll_d100
 		cmp bx, 97
-			mov bx, cx
-			mov byte [CurrentDungeon + bx], 8
-		jl .skip
-	.skip:
-	dec cx
-	jnz .loop
+		pop bx
+		jl .next
+		mov byte [CurrentDungeon + bx], 8
+		.next:
+		inc bx
+		cmp bx, 625
+		jl .loop
 ret
 
 load_game:
