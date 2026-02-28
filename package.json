@@ -4,12 +4,12 @@
   "description": "DND #1 port in bootable 8086 assembly",
   "private": true,
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "build:debug": "node scripts/build.js --debug",
-    "clean": "node scripts/clean.js",
-    "test": "node scripts/run-tests.js",
-    "test:qemu": "node scripts/run-tests.js",
+    "start": "node Scripts/start.js",
+    "build": "node Scripts/build.js",
+    "build:debug": "node Scripts/build.js --debug",
+    "clean": "node Scripts/clean.js",
+    "test": "node Scripts/run-tests.js",
+    "test:qemu": "node Scripts/run-tests.js",
     "test:playwright": "playwright test"
   },
   "keywords": ["dnd", "8086", "assembly", "bootable"],
