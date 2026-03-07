@@ -1,0 +1,4 @@
+# DND-1-in-8086-Assembly .gitattributes
+* text=auto
+*.asm text eol=lf
+*.md text eol=lf
