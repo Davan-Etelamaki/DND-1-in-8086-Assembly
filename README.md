@@ -12,7 +12,7 @@ A port of Richard Garriott's DND #1 in pure 8086 Assembly.
 | **Documentation/** | Design, flow, data structures, build, testing, issues; see [Documentation/README.md](Documentation/README.md) for the full index |
 | **Dungeons/** | DNG1–DNG6 dungeon data as editable text; see [Dungeons/README.md](Dungeons/README.md) |
 | **playwright/** | Browser-based tests (v86 emulator); see [playwright/README.md](playwright/README.md) |
-| **.cursor/build-specs/** | Component specs (source of truth for acceptance criteria) |
+| **.claude/build-specs/** | Component specs (source of truth for acceptance criteria) |
 
 ## What this is
 

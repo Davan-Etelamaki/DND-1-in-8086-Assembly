@@ -19,7 +19,7 @@ INPUT REQUIREMENTS
 - Requirements come from:
   - Plan from Plan-From-Requirements rule (pasted requirements or feature description), or
   - In-repo Documentation/ (Game-Flow.md, Architecture.md, Testing.md, DND1-Spec-Web-References.md, etc.), or
-  - **`.cursor/build-specs/`** — component-level spec (00-FULL-SCOPE.md and 01–09; see build-specs/README.md) when implementing a specific area (character, shop, monsters, dungeon/tiles, commands, move, combat, save/load), or
+  - **`.claude/build-specs/`** — component-level spec (00-FULL-SCOPE.md and 01–09; see build-specs/README.md) when implementing a specific area (character, shop, monsters, dungeon/tiles, commands, move, combat, save/load), or
   - Explicit user instructions.
 - If a working plan or task list exists in chat or a doc, use it.
 
@@ -51,7 +51,7 @@ REPO CONVENTIONS
 ────────────────────────────
 
 Before implementing:
-- Read relevant docs: Documentation/Game-Flow.md, Architecture.md, Testing.md, Build-and-Run.md; for game-behavior or alignment with the original game, also Documentation/DND1-Spec-Web-References.md; for **component-level behavior** (character, shop, dungeon, move, combat, save/load), use **`.cursor/build-specs/`** (README.md and the relevant 00–09 file); for test coverage, Documentation/Acceptance-Criteria.md (if present); for adding tests, Documentation/Testing.md (strategy and step-by-step). Use the rule **Assembly-and-Test-Conventions** when writing assembly or adding unit tests.
+- Read relevant docs: Documentation/Game-Flow.md, Architecture.md, Testing.md, Build-and-Run.md; for game-behavior or alignment with the original game, also Documentation/DND1-Spec-Web-References.md; for **component-level behavior** (character, shop, dungeon, move, combat, save/load), use **`.claude/build-specs/`** (README.md and the relevant 00–09 file); for test coverage, Documentation/Acceptance-Criteria.md (if present); for adding tests, Documentation/Testing.md (strategy and step-by-step). Use the rule **Assembly-and-Test-Conventions** when writing assembly or adding unit tests.
 - Follow existing assembly patterns in SourceFiles/ and Test/.
 - Follow Playwright test structure in playwright/tests/ and playwright/README.md.
 - Reuse Test/Libraries/ where applicable.

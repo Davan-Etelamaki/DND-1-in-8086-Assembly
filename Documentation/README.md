@@ -14,7 +14,7 @@ Quick pointer to where to find what in this repo. Use this when you need the rig
 | **Documentation/** | This folder: design, build, test, issues, acceptance criteria |
 | **Dungeons/** | DNG1.txt–DNG6.txt and README (dungeon data; extraction script in Scripts/) |
 | **playwright/** | Tests run in v86 emulator; suite.spec.js, game smoke |
-| **.cursor/build-specs/** | 00-FULL-SCOPE.md, 01–09 component specs (source of truth for AC) |
+| **.claude/build-specs/** | 00-FULL-SCOPE.md, 01–09 component specs (source of truth for AC) |
 
 ---
 
@@ -26,7 +26,7 @@ Quick pointer to where to find what in this repo. Use this when you need the rig
 | **Data layout** — Character, Dungeon, tile codes, Items, Spells, Monsters, save format | [Data-Structures.md](Data-Structures.md) |
 | **Architecture** — boot sequence, memory map, Stage1/Stage2, module organization | [Architecture.md](Architecture.md) |
 | **Reference spec** — Richard Garriott DND #1 (1977) from web refs; mapping to this port | [DND1-Spec-Web-References.md](DND1-Spec-Web-References.md) |
-| **Build specs** — Full-scope and component specs (from spec + BASIC + web); component-level detail | [.cursor/build-specs/](../.cursor/build-specs/README.md) |
+| **Build specs** — Full-scope and component specs (from spec + BASIC + web); component-level detail | [.claude/build-specs/](../.claude/build-specs/README.md) |
 | **DNG1–DNG6** — Dungeon data files (editable .txt); format, extraction, and mapping to Dungeons.asm | [Dungeons/README.md](../Dungeons/README.md) |
 
 ---

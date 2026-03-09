@@ -1,6 +1,6 @@
 # Acceptance Criteria
 
-**Source of truth:** `.cursor/build-specs/` (00-FULL-SCOPE.md and component specs 01–09). This document derives testable acceptance criteria from those specs. Used for test coverage, validation, and **systematic issue finding**. Updated by verify-implementation (Validate-all-spec or normal verification).
+**Source of truth:** `.claude/build-specs/` (00-FULL-SCOPE.md and component specs 01–09). This document derives testable acceptance criteria from those specs. Used for test coverage, validation, and **systematic issue finding**. Updated by verify-implementation (Validate-all-spec or normal verification).
 
 ---
 

@@ -35,7 +35,7 @@ Optional:
 - VerificationPhase: true | false (default false; in Validate-all-spec mode, verification is always run)
 - Scope: <short label for log, e.g. "game flow unit tests">
 
-Documentation/ (including DND1-Spec-Web-References.md for Richard Garriott DND #1), **`.cursor/build-specs/`** (component-level spec: 00-FULL-SCOPE.md and 01–09; see build-specs/README.md), and repo source are the spec.
+Documentation/ (including DND1-Spec-Web-References.md for Richard Garriott DND #1), **`.claude/build-specs/`** (component-level spec: 00-FULL-SCOPE.md and 01–09; see build-specs/README.md), and repo source are the spec.
 
 ────────────────────────────
 EXECUTION STEPS (when Spec or Feature is provided)
@@ -43,7 +43,7 @@ EXECUTION STEPS (when Spec or Feature is provided)
 
 1) Plan (Rule)
 - Invoke: Plan-From-Requirements
-- Inputs: pasted requirements or feature description; use Documentation/, **`.cursor/build-specs/`** (for component-level scope), and existing source as source of truth
+- Inputs: pasted requirements or feature description; use Documentation/, **`.claude/build-specs/`** (for component-level scope), and existing source as source of truth
 - Output: implementation plan (what to change, which files, which tests)
 
 2) Implement (Rule)
@@ -84,7 +84,7 @@ When RUN_BUILD_PIPELINE is invoked with no Spec and no Feature:
 ────────────────────────────
 NOTES
 ────────────────────────────
-- Documentation/, **`.cursor/build-specs/`** (component specs 00–09), and code are source of truth.
-- In-repo game reference spec: Documentation/DND1-Spec-Web-References.md (Richard Garriott DND #1 from web refs). Component-level behavior: .cursor/build-specs/ (README.md, 00-FULL-SCOPE.md, 01–09). Optional web search only if more detail is needed beyond those docs.
+- Documentation/, **`.claude/build-specs/`** (component specs 00–09), and code are source of truth.
+- In-repo game reference spec: Documentation/DND1-Spec-Web-References.md (Richard Garriott DND #1 from web refs). Component-level behavior: .claude/build-specs/ (README.md, 00-FULL-SCOPE.md, 01–09). Optional web search only if more detail is needed beyond those docs.
 - Build log: Documentation/ai-build-log.md (prepend entries; single footer at end).
 - Verification creates Acceptance Criteria (Documentation/Acceptance-Criteria.md) from spec and creates tests for any AC that lack coverage (Test/ or Playwright per Testing.md).

@@ -30,4 +30,4 @@ COMMON AREAS (see Issues-and-Risks.md)
 
 QUICK REFS
 - Documentation/Issues-and-Risks.md, Documentation/Testing.md, rule Assembly-and-Test-Conventions.
-- For intended behavior of the component you're fixing: `.cursor/build-specs/` (e.g. 04-Dungeon-and-Tiles, 06-Move-and-Tile-Handling, 08-Save-Load); see build-specs/README.md.
+- For intended behavior of the component you're fixing: `.claude/build-specs/` (e.g. 04-Dungeon-and-Tiles, 06-Move-and-Tile-Handling, 08-Save-Load); see build-specs/README.md.

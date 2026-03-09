@@ -110,4 +110,4 @@ test("Game: foo (<short description>) run without failure", async () => {
 
 From repo root: `npm test`. All tests (including the new one) must pass.
 
-**Checklist summary:** Create Test/Game/\<Name\>.asm → include from Stage2 after game source → add call in Tests.asm → add to SECTION_MARKERS → add test in suite.spec.js → run `npm test`. See also **Assembly-and-Test-Conventions** in `.cursor/rules/` and [Issues-and-Risks.md](Issues-and-Risks.md).
+**Checklist summary:** Create Test/Game/\<Name\>.asm → include from Stage2 after game source → add call in Tests.asm → add to SECTION_MARKERS → add test in suite.spec.js → run `npm test`. See also **Assembly-and-Test-Conventions** in `.claude/rules/` and [Issues-and-Risks.md](Issues-and-Risks.md).

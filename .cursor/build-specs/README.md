@@ -40,4 +40,4 @@ Component specs and full-scope documentation for the **DND-1 8086 Assembly** por
 
 - **Documentation/** — Current port behavior, build, test, issues. Build-specs reference these and add **component-level** and **BASIC-level** detail.
 - **Documentation/Acceptance-Criteria.md** — Acceptance criteria derived from spec; build-specs are the spec source for those AC.
-- **.cursor/rules/** — Plan-From-Requirements and Implement-From-Plan can use build-specs as the spec source when planning or implementing features.
+- **.claude/rules/** — Plan-From-Requirements and Implement-From-Plan can use build-specs as the spec source when planning or implementing features.

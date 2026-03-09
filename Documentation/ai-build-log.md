@@ -16,7 +16,7 @@ Structured audit log for pipeline runs. New entries are prepended; footer is upd
 - Commit (full): d36bc86ce7c1f77a78530e8f97a830965ed2ba23
 
 **What was built / changed**
-- Validate-all-spec run. No code changes. Verification: Acceptance Criteria (Documentation/Acceptance-Criteria.md) and build-specs (.cursor/build-specs/ 00–09) checked; alignment confirmed. Gap list shows 7 covered by unit tests (read_dungeon, get_tile_number, check_inventory(12)/remove, DungeonNumber, CurrentMonster); remaining gaps (trap+spikes, find_secret_door, wait_key, disk_save, new-game name) are integration/manual.
+- Validate-all-spec run. No code changes. Verification: Acceptance Criteria (Documentation/Acceptance-Criteria.md) and build-specs (.claude/build-specs/ 00–09) checked; alignment confirmed. Gap list shows 7 covered by unit tests (read_dungeon, get_tile_number, check_inventory(12)/remove, DungeonNumber, CurrentMonster); remaining gaps (trap+spikes, find_secret_door, wait_key, disk_save, new-game name) are integration/manual.
 
 **Files changed**
 - Created: (none)
@@ -27,7 +27,7 @@ Structured audit log for pipeline runs. New entries are prepended; footer is upd
 - npm test: 13 passed (assembly suite + game smoke)
 
 **Spec Validation Report (summary)**
-- .cursor/build-specs/: Aligns — AC derived from 00-FULL-SCOPE and 01–09; AC-001–AC-046 + R-1–R-12 documented.
+- .claude/build-specs/: Aligns — AC derived from 00-FULL-SCOPE and 01–09; AC-001–AC-046 + R-1–R-12 documented.
 - Documentation/Acceptance-Criteria.md: 46 AC + 12 regression AC; gap list updated with coverage status.
 - Test coverage: GameDiceTests, GamePlayerTests, GameDungeonTests (bounds + get_tile_number), GameInventoryTests (add/check/remove 12), GameMonstersTests, GameLogicTests (read_dungeon 7/8, DungeonNumber byte, CurrentMonster layout); Playwright assembly suite + game smoke.
 - Gaps (no unit test): trap+spikes/rope, find_secret_door roll>4, wait_key blocking, disk_save 0x8000, new-game name display — documented as integration or manual.

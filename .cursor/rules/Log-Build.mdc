@@ -18,7 +18,7 @@ INPUT SOURCES
 ────────────────────────────
 
 - Inspect the current working tree to determine **files created/modified** (assembly, tests, scripts, docs).
-- If the change was driven by a build-spec: note the spec (e.g. `.cursor/build-specs/04-Dungeon-and-Tiles.md`) in the log entry "What was built / changed" or "Notes" where helpful.
+- If the change was driven by a build-spec: note the spec (e.g. `.claude/build-specs/04-Dungeon-and-Tiles.md`) in the log entry "What was built / changed" or "Notes" where helpful.
 - Retrieve Git metadata when available:
   - Current branch name
   - Current HEAD commit hash (full 40-character)

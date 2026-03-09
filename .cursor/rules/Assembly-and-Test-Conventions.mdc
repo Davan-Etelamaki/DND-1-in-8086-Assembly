@@ -74,4 +74,4 @@ QUICK REFS
 - Strategy and what’s covered: Documentation/Testing.md
 - Data layout: Documentation/Data-Structures.md
 - Game flow: Documentation/Game-Flow.md
-- Component-level spec (character, dungeon, move, combat, save/load, etc.): `.cursor/build-specs/` (README.md, 00-FULL-SCOPE.md, 01–09)
+- Component-level spec (character, dungeon, move, combat, save/load, etc.): `.claude/build-specs/` (README.md, 00-FULL-SCOPE.md, 01–09)

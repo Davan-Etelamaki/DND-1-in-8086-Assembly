@@ -22,7 +22,7 @@ This project does not rely on an external spec. Use:
 1. **In-repo documentation** (authoritative):
    - `Documentation/` — especially `Game-Flow.md`, `Architecture.md`, `Testing.md`, `Build-and-Run.md`, `Data-Structures.md`, `Issues-and-Risks.md`
    - **`Documentation/DND1-Spec-Web-References.md`** — reference spec for Richard Garriott's DND #1 (1977) from web sources; use when scoping or aligning game behavior (character, classes, monsters, tiles, shop).
-   - **`.cursor/build-specs/`** — **authoritative component-level spec**: full scope (00-FULL-SCOPE.md), component specs 01–09 (Character, Shop, Monsters, Dungeon/Tiles, Commands, Move/Tile, Combat, Save/Load, BASIC excerpts). See build-specs/README.md for the index. Use these when scoping features or aligning to the original game.
+   - **`.claude/build-specs/`** — **authoritative component-level spec**: full scope (00-FULL-SCOPE.md), component specs 01–09 (Character, Shop, Monsters, Dungeon/Tiles, Commands, Move/Tile, Combat, Save/Load, BASIC excerpts). See build-specs/README.md for the index. Use these when scoping features or aligning to the original game.
    - **`Documentation/Acceptance-Criteria.md`** — Acceptance Criteria derived from spec by verification; use when planning tests or checking coverage.
    - `playwright/README.md` for test layout; **Documentation/Testing.md** for strategy and step-by-step test addition; **Documentation/README.md** for doc index
 2. **Existing source** — `SourceFiles/`, `Test/`, `tools/`, `scripts/` — as the implementation reference.

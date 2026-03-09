@@ -18,7 +18,7 @@ Controlled verification phase to ensure the implementation:
 5. Stays within repo conventions (assembly, Test/, playwright, scripts)
 
 This Skill:
-- Derives Acceptance Criteria from spec docs: **`.cursor/build-specs/`** (README.md, 00-FULL-SCOPE.md, and component specs 01–09), plus Documentation/ (DND1-Spec-Web-References.md, Game-Flow.md, Data-Structures.md, Architecture.md, Testing.md), and writes/updates Documentation/Acceptance-Criteria.md
+- Derives Acceptance Criteria from spec docs: **`.claude/build-specs/`** (README.md, 00-FULL-SCOPE.md, and component specs 01–09), plus Documentation/ (DND1-Spec-Web-References.md, Game-Flow.md, Data-Structures.md, Architecture.md, Testing.md), and writes/updates Documentation/Acceptance-Criteria.md
 - For each AC: checks if a test already exists (Test/Game/, Test/Libraries/, playwright/tests/); if not, creates the test following Documentation/Testing.md (assembly unit test in Test/ with RunTests + emulator section + suite.spec.js, or Playwright smoke when appropriate)
 - Runs the project test suite (e.g. `npm test`)
 - Produces a Verification Report or Spec Validation Report including AC and tests created
@@ -45,7 +45,7 @@ PROCESS (normal verification)
 
 1) Load context
 - List of files changed (Paths)
-- Relevant docs: **`.cursor/build-specs/`** (component spec for the area being verified, e.g. 04-Dungeon, 06-Move, 08-Save-Load); Documentation/Testing.md, Build-and-Run.md, Game-Flow.md (if game logic); Documentation/DND1-Spec-Web-References.md when verifying game-behavior or spec alignment
+- Relevant docs: **`.claude/build-specs/`** (component spec for the area being verified, e.g. 04-Dungeon, 06-Move, 08-Save-Load); Documentation/Testing.md, Build-and-Run.md, Game-Flow.md (if game logic); Documentation/DND1-Spec-Web-References.md when verifying game-behavior or spec alignment
 
 2) Derive Acceptance Criteria and ensure tests exist
 - From the spec docs relevant to Scope, derive testable Acceptance Criteria (e.g. "Character has 7 attributes + gold", "Commands 0–12 dispatch correctly", "Tile types 0–8 behave per Game-Flow").
@@ -72,7 +72,7 @@ PROCESS (ValidateAllSpec: true — validate all spec)
 When ValidateAllSpec is true (e.g. RUN_BUILD_PIPELINE with no Spec/Feature):
 
 1) Load all spec docs
-- **`.cursor/build-specs/`** — 00-FULL-SCOPE.md and component specs 01–09 (Character, Shop, Monsters, Dungeon/Tiles, Commands, Move/Tile, Combat, Save/Load, BASIC excerpts); see build-specs/README.md
+- **`.claude/build-specs/`** — 00-FULL-SCOPE.md and component specs 01–09 (Character, Shop, Monsters, Dungeon/Tiles, Commands, Move/Tile, Combat, Save/Load, BASIC excerpts); see build-specs/README.md
 - Documentation/DND1-Spec-Web-References.md (reference spec: character, classes, monsters, tiles, shop; mapping to port)
 - Documentation/Game-Flow.md (intro, loop, commands, move/tile handling)
 - Documentation/Data-Structures.md (Character, Dungeon, tile codes, Items, Spells, Monsters)
@@ -106,7 +106,7 @@ Report must contain:
 - Tests created for missing coverage: <list of files added/updated> or "none"
 
 ## Specs checked
-- .cursor/build-specs/ (00-FULL-SCOPE, 01–09):
+- .claude/build-specs/ (00-FULL-SCOPE, 01–09):
 - DND1-Spec-Web-References.md:
 - Game-Flow.md:
 - Data-Structures.md:
